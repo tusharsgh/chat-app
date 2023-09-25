@@ -7,6 +7,8 @@ import cookieParser from 'cookie-parser';
 import compression  from 'compression';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
+import createHttpError from 'http-errors';
+import routes from './routes/index.js';
 morgan.token('host', function(req, res) {
     return req.hostname;
     });
@@ -26,10 +28,27 @@ app.use(cookieParser());
 //compression
 app.use(compression());
 app.use(fileUpload({useTempFile:true}));
-
+app.use("/api/v1",routes);
 app.use(cors());
 app.get('/', (req, res) => {
-    res.send(req.body)
+    // res.send(req.body)
+
+})
+app.use(async(req,res,next)=>{
+  next(createHttpError.BadRequest('this route doesnt exist'))
+})
+//error handling
+app.use(async(err,req,res,next)=>{
+    res.status(err.status||500)
+    res.send(
+        {
+            error:{
+                status:err.status||500,
+                message:err.message,
+            }
+        }
+    )
+
 })
 
 export default app;
