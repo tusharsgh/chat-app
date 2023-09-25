@@ -13,7 +13,8 @@ morgan.token('host', function(req, res) {
 //dotEnv config
 dotenv.config();
 const app = express();
-app.use(morgan(':method :host :status :res[content-length] - :response-time ms'));
+if(process.env.NODE_ENV != 'production'){
+app.use(morgan(':method :host :status :res[content-length] - :response-time ms'));}
 app.use(helmet());
 //parse json body
 app.use(express.json());
