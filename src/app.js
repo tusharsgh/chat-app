@@ -16,7 +16,7 @@ morgan.token('host', function(req, res) {
 dotenv.config();
 const app = express();
 if(process.env.NODE_ENV != 'production'){
-app.use(morgan(':method :host :status :res[content-length] - :response-time ms'));}
+app.use(morgan(':method :host :status :res[content-length] - :response-time ms'));} //logs http request
 app.use(helmet());
 //parse json body
 app.use(express.json());
@@ -31,7 +31,7 @@ app.use(fileUpload({useTempFile:true}));
 app.use("/api/v1",routes);
 app.use(cors());
 app.get('/', (req, res) => {
-    // res.send(req.body)
+     res.send(req.body)
 
 })
 app.use(async(req,res,next)=>{
