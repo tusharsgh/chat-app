@@ -14,13 +14,14 @@ morgan.token('host', function(req, res) {
     });
 //dotEnv config
 dotenv.config();
+
 const app = express();
 if(process.env.NODE_ENV != 'production'){
 app.use(morgan(':method :host :status :res[content-length] - :response-time ms'));} //logs http request
 app.use(helmet());
 //parse json body
 app.use(express.json());
-app.use(express.urlencoded({ extended:true})); //encodes the data into the respnse url
+// app.use(express.urlencoded({ extended:true})); //encodes the data into the respnse url
 //sanitize req data
 app.use(ExpressMongoSanitize());
 //enable cookie parser
@@ -29,7 +30,11 @@ app.use(cookieParser());
 app.use(compression());
 app.use(fileUpload({useTempFile:true}));
 app.use("/api/v1",routes);
-app.use(cors());
+app.use(cors(
+  {
+    origin:'http://localhost:3000',
+  }  
+));
 app.get('/', (req, res) => {
      res.send(req.body)
 

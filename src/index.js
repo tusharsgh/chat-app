@@ -20,7 +20,8 @@ mongoose.connect(DATABASE_URL,{
 
 console.log(process.env.NODE_ENV)
 const PORT = process.env.PORT||8000;
-let server = app.listen(PORT,()=>
+let server;
+ server = app.listen(PORT,()=>
 {logger.info(`listening on port ${PORT}...`);
   console.log("process id",process.pid)
 //  throw new Error('error in server')
