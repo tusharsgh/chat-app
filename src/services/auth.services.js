@@ -61,7 +61,7 @@ export const createUser = async (userData) => {
     );
   }
 
-  //hash password--->to be done in the user model
+ 
 
   //adding user to databse
   const user = await new UserModel({
