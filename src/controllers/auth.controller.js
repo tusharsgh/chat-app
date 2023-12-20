@@ -1,14 +1,18 @@
-
 import createHttpError from "http-errors";
-import { createUser, signUser } from "../services/auth.services.js";
-import { generateToken, verifyToken } from "../services/token.services.js";
-import { findUser } from "../services/user.services.js";
+import { createUser, signUser } from "../services/auth.service.js";
+import { generateToken, verifyToken } from "../services/token.service.js";
+import { findUser } from "../services/user.service.js";
 
 export const register = async (req, res, next) => {
   try {
     const { name, email, picture, status, password } = req.body;
-    console.log({ name, email, picture, status, password})
-    const newUser = await createUser(req.body);
+    const newUser = await createUser({
+      name,
+      email,
+      picture,
+      status,
+      password,
+    });
     const access_token = await generateToken(
       { userId: newUser._id },
       "1d",

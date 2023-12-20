@@ -1,9 +1,12 @@
-import express from 'express';
-import authRoute from './auth.route.js';
-import conversationRoute from './conversations.route.js';
-import messageRoute from './message.route.js';
-const router= express.Router();
-router.use('/auth',authRoute);    ///sends requests to auth routes
-router.use('/conversation',conversationRoute); 
-router.use('/message',messageRoute);
+import express from "express";
+import authRoutes from "./auth.route.js";
+import userROutes from "./user.route.js";
+import ConversationRoutes from "./conversation.route.js";
+import MessageRoutes from "./message.route.js";
+const router = express.Router();
+
+router.use("/auth", authRoutes);
+router.use("/user", userROutes);
+router.use("/conversation", ConversationRoutes);
+router.use("/message", MessageRoutes);
 export default router;

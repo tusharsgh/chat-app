@@ -8,9 +8,9 @@ export const doesConversationExist = async (
 ) => {
   if (isGroup === false) {
     let convos = await ConversationModel.find({
-      isGroup: false,                                          
+      isGroup: false,
       $and: [
-        { users: { $elemMatch: { $eq: sender_id } } },        //finding both the sender and reciever in the schema
+        { users: { $elemMatch: { $eq: sender_id } } },
         { users: { $elemMatch: { $eq: receiver_id } } },
       ],
     })
@@ -49,8 +49,7 @@ export const createConversation = async (data) => {
   const newConvo = await ConversationModel.create(data);
   if (!newConvo)
     throw createHttpError.BadRequest("Oops...Something went wrong !");
- 
-    return newConvo;
+  return newConvo;
 };
 
 export const populateConversation = async (
@@ -69,7 +68,7 @@ export const populateConversation = async (
 export const getUserConversations = async (user_id) => {
   let conversations;
   await ConversationModel.find({
-    users: { $elemMatch: { $eq: user_id } },     //populating the conversation
+    users: { $elemMatch: { $eq: user_id } },
   })
     .populate("users", "-password")
     .populate("admin", "-password")

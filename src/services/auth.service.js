@@ -1,4 +1,3 @@
-
 import createHttpError from "http-errors";
 import validator from "validator";
 import bcrypt from "bcrypt";
@@ -61,7 +60,7 @@ export const createUser = async (userData) => {
     );
   }
 
- 
+  //hash password--->to be done in the user model
 
   //adding user to databse
   const user = await new UserModel({

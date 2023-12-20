@@ -1,4 +1,3 @@
-
 import jwt from "jsonwebtoken";
 import logger from "../configs/logger.config.js";
 export const sign = async (payload, expiresIn, secret) => {
