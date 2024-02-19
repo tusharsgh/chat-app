@@ -29,7 +29,7 @@ export const create_open_conversation = async (req, res, next) => {
       if (existed_conversation) {
         res.json(existed_conversation);
       } else {
-        // let receiver_user = await findUser(receiver_id);
+      //  let receiver_user = await findUser(receiver_id);
         let convoData = {
           name: "conversation name",
           picture: "conversation picture",
@@ -45,6 +45,7 @@ export const create_open_conversation = async (req, res, next) => {
         res.status(200).json(populatedConvo);
       }
     } else {
+      // console.log(receiver_id)
       console.log("hnaaaaaaaaaa");
       //it's a group chat
       //check if group chat exists
@@ -56,6 +57,7 @@ export const create_open_conversation = async (req, res, next) => {
       res.status(200).json(existed_group_conversation);
     }
   } catch (error) {
+    
     next(error);
   }
 };
